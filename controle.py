@@ -44,6 +44,7 @@ def cadastrar_acolhido():
                                       str(cpf_responsavel), str(vinculo), str(entrada), str(saida), str(obs)))
     banco.commit()
 
+
 def medicamentos_abrir():
     cadMedicamento.show()
     c = banco.cursor()
@@ -76,6 +77,18 @@ def cadastrar_medicamento():
 
 def entradas_abrir():
     cadEntradaMedicamento.show()
+    c = banco.cursor()
+
+    comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
+    JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;""")
+    c.execute(comando_SQL)
+    lidos = c.fetchall()
+    cadEntradaMedicamento.tabelaEntrada.setRowCount(len(lidos))
+    cadEntradaMedicamento.tabelaEntrada.setColumnCount(6)
+
+    for i in range(len(lidos)):
+        for j in range(6):
+            cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
 def cadastrar_entrada():
     id_medicamento = cadEntradaMedicamento.edtIdMed.text()
@@ -87,6 +100,18 @@ def cadastrar_entrada():
 
     c.execute("""INSERT INTO entradas_medicamentos (id_medicamento, qtd_entrada, data_entrada, obs)
                 VALUES (?, ?, ?, ?)""", (id_medicamento, qtd_entrada, data_entrada, obs))
+
+    comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
+        JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;""")
+    c.execute(comando_SQL)
+    lidos = c.fetchall()
+    cadEntradaMedicamento.tabelaEntrada.setRowCount(len(lidos))
+    cadEntradaMedicamento.tabelaEntrada.setColumnCount(6)
+
+    for i in range(len(lidos)):
+        for j in range(6):
+            cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
 
 def tratamentos_abrir():
     tratamento.show()

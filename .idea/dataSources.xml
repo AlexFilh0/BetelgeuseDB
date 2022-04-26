@@ -8,5 +8,17 @@
       <jdbc-url>jdbc:sqlite:C:\Users\filho\OneDrive\Área de Trabalho\TrabalhoBetelgeuse\pvn_banco.bd</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="pvn_banco [2]" uuid="e0103e04-92b7-4b39-9dcf-47f7793c05a5">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Usuario\PycharmProjects\BetelgeuseDB\pvn_banco.bd</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.36.0.3/sqlite-jdbc-3.36.0.3.jar</url>
+        </library>
+      </libraries>
+    </data-source>
   </component>
 </project>

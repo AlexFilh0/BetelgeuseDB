@@ -119,7 +119,7 @@
      <string>CADASTRAR</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="tabelaEntrada">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -148,12 +148,12 @@
     </column>
     <column>
      <property name="text">
-      <string>DATA</string>
+      <string>QUANTIDADE</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>QUANTIDADE</string>
+      <string>DATA</string>
      </property>
     </column>
     <column>
