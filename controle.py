@@ -3,11 +3,12 @@ import sqlite3
 
 from banco import criacao_banco
 
+# numero_id = 0
 
-numero_id = 0
-
+# executa o metodo de criação do banco que será executado apenas na primeira vez que o programa é aberto no pc
 criacao_banco()
 
+# conecta com o banco de dados
 banco = sqlite3.connect('pvn_banco.bd')
 
 # Acolhidos
@@ -124,7 +125,7 @@ def cadastrar_entrada():
     c = banco.cursor()
 
     c.execute("""INSERT INTO entradas_medicamentos (id_medicamento, qtd_entrada, data_entrada, obs)
-                VALUES (?, ?, ?, ?)""", (id_medicamento, qtd_entrada, data_entrada, obs))
+                VALUES (?, ?, ?, ?)""", (str(id_medicamento), str(qtd_entrada), str(data_entrada), str(obs)))
 
     banco.commit()
 
@@ -155,8 +156,8 @@ def cadastrar_tratamento():
     c = banco.cursor()
 
     c.execute('''INSERT INTO controle_medicamentos (id_acolhido, id_medicamento, qtd_dose, frequencia, inicio_tratamento,
-                termino_tratamento, obs) VALUES (?, ?, ?, ?, ?, ?, ?)''', (id_acolhido, id_medicamento, qtd_dose,
-                frequencia, inicio, termino, obs))
+                termino_tratamento, obs) VALUES (?, ?, ?, ?, ?, ?, ?)''', (str(id_acolhido), str(id_medicamento),
+                str(qtd_dose), str(frequencia), str(inicio), str(termino), str(obs)))
 
     banco.commit()
 
@@ -234,3 +235,5 @@ tratamento.btnCadastrarTratamento.clicked.connect(cadastrar_tratamento)
 acolhido.show()
 
 app.exec()
+
+banco.close()
