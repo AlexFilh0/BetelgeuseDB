@@ -74,6 +74,16 @@ def cadastrar_medicamento():
                 VALUES (?, ?, ?)''',(str(nome), str(espec), str(obs)))
     banco.commit()
 
+    comando_SQL = ("""SELECT * FROM medicamentos""")
+    c.execute(comando_SQL)
+    lidos = c.fetchall()
+    cadMedicamento.tabelaCadastro.setRowCount(len(lidos))
+    cadMedicamento.tabelaCadastro.setColumnCount(4)
+
+    for i in range(len(lidos)):
+        for j in range(4):
+            cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
 
 def entradas_abrir():
     cadEntradaMedicamento.show()
