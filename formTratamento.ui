@@ -135,7 +135,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="edtFrenquencia">
+   <widget class="QLineEdit" name="edtFrequencia">
     <property name="geometry">
      <rect>
       <x>530</x>

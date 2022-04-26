@@ -9,12 +9,11 @@ con = sqlite3.connect('pvn_banco.bd')
 
 c = con.cursor()
 
-c.execute('''ALTER TABLE acolhidos RENAME COLUMN desde_uso_ano TO desde_uso_idade;''')
+c.execute('''SELECT * FROM controle_medicamentos''')
 
-'''
 for linha in c.fetchall():
     print(linha)
-'''
+
 
 con.commit()
 

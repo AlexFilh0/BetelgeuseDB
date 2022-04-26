@@ -10,7 +10,7 @@ criacao_banco()
 
 banco = sqlite3.connect('pvn_banco.bd')
 
-
+# Acolhidos
 def cadastrar_acolhido():
     nome = acolhido.edtNome.text()
     rg = acolhido.edtRG.text()
@@ -44,7 +44,23 @@ def cadastrar_acolhido():
                                       str(cpf_responsavel), str(vinculo), str(entrada), str(saida), str(obs)))
     banco.commit()
 
+def verCadastro():
+    cadastrado.show()
 
+    comando_SQL = "SELECT * FROM acolhidos"
+    cursor = banco.cursor()
+    cursor.execute(comando_SQL)
+    lidos = cursor.fetchall()
+
+
+    cadastrado.tabela.setRowCount(len(lidos))
+    cadastrado.tabela.setColumnCount(3)
+
+    for i in range(len(lidos)):
+        for j in range(3):
+            cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
+# Medicamentos
 def medicamentos_abrir():
     cadMedicamento.show()
     c = banco.cursor()
@@ -59,7 +75,6 @@ def medicamentos_abrir():
     for i in range(len(lidos)):
         for j in range(4):
             cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
-
 
 def cadastrar_medicamento():
     cadMedicamento.show()
@@ -84,7 +99,7 @@ def cadastrar_medicamento():
         for j in range(4):
             cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-
+# Entrada
 def entradas_abrir():
     cadEntradaMedicamento.show()
     c = banco.cursor()
@@ -111,6 +126,8 @@ def cadastrar_entrada():
     c.execute("""INSERT INTO entradas_medicamentos (id_medicamento, qtd_entrada, data_entrada, obs)
                 VALUES (?, ?, ?, ?)""", (id_medicamento, qtd_entrada, data_entrada, obs))
 
+    banco.commit()
+
     comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
         JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;""")
     c.execute(comando_SQL)
@@ -122,29 +139,26 @@ def cadastrar_entrada():
         for j in range(6):
             cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-
+# Tratamento
 def tratamentos_abrir():
     tratamento.show()
 
 def cadastrar_tratamento():
+    id_acolhido = tratamento.edtIAcolhido.text()
+    id_medicamento = tratamento.edtIMedicamento.text()
+    qtd_dose = tratamento.edtDose.text()
+    frequencia = tratamento.edtFrequencia.text()
+    inicio = tratamento.edtInicio.text()
+    termino = tratamento.edtTermino.text()
+    obs = tratamento.edtOBS.text()
 
-    print('erros aqui não')
+    c = banco.cursor()
 
-def verCadastro():
-    cadastrado.show()
+    c.execute('''INSERT INTO controle_medicamentos (id_acolhido, id_medicamento, qtd_dose, frequencia, inicio_tratamento,
+                termino_tratamento, obs) VALUES (?, ?, ?, ?, ?, ?, ?)''', (id_acolhido, id_medicamento, qtd_dose,
+                frequencia, inicio, termino, obs))
 
-    comando_SQL = "SELECT * FROM acolhidos"
-    cursor = banco.cursor()
-    cursor.execute(comando_SQL)
-    lidos = cursor.fetchall()
-
-
-    cadastrado.tabela.setRowCount(len(lidos))
-    cadastrado.tabela.setColumnCount(3)
-
-    for i in range(len(lidos)):
-        for j in range(3):
-            cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+    banco.commit()
 
 def excluirDado():
     excluir = cadastrado.edtExcluir.text()
