@@ -176,4 +176,5 @@ tratamento.btnCadastrarTratamento.clicked.connect(cadastrar_tratamento)
 
 
 acolhido.show()
+
 app.exec()
