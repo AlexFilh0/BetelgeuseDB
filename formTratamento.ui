@@ -194,7 +194,7 @@
      <string>CADASTRAR</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="tabelaTratamento">
     <property name="geometry">
      <rect>
       <x>15</x>

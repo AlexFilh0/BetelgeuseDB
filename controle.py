@@ -11,7 +11,7 @@ criacao_banco()
 # conecta com o banco de dados
 banco = sqlite3.connect('pvn_banco.bd')
 
-# Acolhidos
+# Acolhidos --> OK
 def cadastrar_acolhido():
     nome = acolhido.edtNome.text()
     rg = acolhido.edtRG.text()
@@ -45,6 +45,7 @@ def cadastrar_acolhido():
                                       str(cpf_responsavel), str(vinculo), str(entrada), str(saida), str(obs)))
     banco.commit()
 
+# Ver acolhidos cadastrados -->
 def verCadastro():
     cadastrado.show()
 
@@ -61,7 +62,7 @@ def verCadastro():
         for j in range(3):
             cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-# Medicamentos
+# Ver medicamentos --> OK
 def medicamentos_abrir():
     cadMedicamento.show()
     c = banco.cursor()
@@ -77,6 +78,7 @@ def medicamentos_abrir():
         for j in range(4):
             cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
+# Cadastrar medicamentos --> OK
 def cadastrar_medicamento():
     cadMedicamento.show()
 
@@ -100,7 +102,7 @@ def cadastrar_medicamento():
         for j in range(4):
             cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-# Entrada
+# Entrada --> OK
 def entradas_abrir():
     cadEntradaMedicamento.show()
     c = banco.cursor()
@@ -116,6 +118,7 @@ def entradas_abrir():
         for j in range(6):
             cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
+# Cadastrar entrada de medicamento --> Ok
 def cadastrar_entrada():
     id_medicamento = cadEntradaMedicamento.edtIdMed.text()
     qtd_entrada = cadEntradaMedicamento.edtQtdMed.text()
@@ -144,6 +147,21 @@ def cadastrar_entrada():
 def tratamentos_abrir():
     tratamento.show()
 
+    c = banco.cursor()
+
+    comando_SQL = ("""SELECT a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
+    c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
+    JOIN medicamentos as m on c.id_medicamento = m.id_medicamento""")
+    c.execute(comando_SQL)
+    lidos = c.fetchall()
+    print(lidos)
+    tratamento.tabelaTratamento.setRowCount(len(lidos))
+    tratamento.tabelaTratamento.setColumnCount(8)
+
+    for i in range(len(lidos)):
+        for j in range(8):
+            tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
 def cadastrar_tratamento():
     id_acolhido = tratamento.edtIAcolhido.text()
     id_medicamento = tratamento.edtIMedicamento.text()
@@ -161,6 +179,7 @@ def cadastrar_tratamento():
 
     banco.commit()
 
+# Excluir cadastrados --> OK
 def excluirDado():
     excluir = cadastrado.edtExcluir.text()
     cadastrado.tabela.removeRow(int(excluir)-1)
@@ -172,6 +191,7 @@ def excluirDado():
 
     #Colocar label para atualizar
 
+# Visualizar dados cadastradps -->
 def visualizarDado():
     visual.show()
 
