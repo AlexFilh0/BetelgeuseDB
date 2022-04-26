@@ -21,7 +21,7 @@ def criacao_banco():
                     posto_saude VARCHAR(50),
                     lazer VARCHAR(20),
                     substancia_favorita VARCHAR(20),
-                    uso_desde_ano INTEGER,
+                    uso_desde_idade INTEGER,
                     religiao VARCHAR(15),
                     responsavel VARCHAR(60),
                     rg_responsavel CHAR(9),

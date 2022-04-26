@@ -6,10 +6,12 @@ from banco import criacao_banco
 
 numero_id = 0
 
+criacao_banco()
+
 banco = sqlite3.connect('pvn_banco.bd')
 
 
-def cadastrar():
+def cadastrar_acolhido():
     nome = acolhido.edtNome.text()
     rg = acolhido.edtRG.text()
     cpf = acolhido.edtCPF.text()
@@ -156,10 +158,15 @@ def visualizarDado():
 
 app = QtWidgets.QApplication([])
 
-acolhido=uic.loadUi("formAcolhido.ui")
-cadastrado=uic.loadUi("formCadastrado.ui")
+acolhido = uic.loadUi("formAcolhido.ui")
+cadastrado = uic.loadUi("formCadastrado.ui")
+visual = uic.loadUi("formVisualizar.ui")
+cadMedicamento = uic.loadUi("formCadMedicamento.ui")
+cadEntradaMedicamento = uic.loadUi("formEntradaMedicamento.ui")
+tratamento = uic.loadUi("formTratamento.ui")
 
-acolhido.btnCadastrar.clicked.connect(cadastrar)
+
+acolhido.btnCadastrar.clicked.connect(cadastrar_acolhido)
 acolhido.btnVer.clicked.connect(verCadastro)
 acolhido.btnMedicamento.clicked.connect(medicamentos_abrir)
 acolhido.btnEntradaMed.clicked.connect(entradas_abrir)
