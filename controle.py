@@ -294,6 +294,8 @@ def visualizarDado():
         for j in range(7):
             visual.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
+def ajuda_abrir():
+    ajuda.show()
 
 app = QtWidgets.QApplication([])
 
@@ -303,6 +305,7 @@ visual = uic.loadUi("formVisualizar.ui")
 cadMedicamento = uic.loadUi("formCadMedicamento.ui")
 cadEntradaMedicamento = uic.loadUi("formEntradaMedicamento.ui")
 tratamento = uic.loadUi("formTratamento.ui")
+ajuda = uic.loadUi("formAjuda.ui")
 
 
 acolhido.btnCadastrar.clicked.connect(cadastrar_acolhido)
@@ -310,6 +313,7 @@ acolhido.btnVer.clicked.connect(verCadastro)
 acolhido.btnMedicamento.clicked.connect(medicamentos_abrir)
 acolhido.btnEntradaMed.clicked.connect(entradas_abrir)
 acolhido.btnTratamento.clicked.connect(tratamentos_abrir)
+acolhido.btnAjuda.clicked.connect(ajuda_abrir)
 
 cadastrado.btnExcluir.clicked.connect(excluirDado)
 cadastrado.btnVisualizar.clicked.connect(visualizarDado)

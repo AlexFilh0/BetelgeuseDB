@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>formAjuda</class>
+ <widget class="QMainWindow" name="formAjuda">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>711</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>70</y>
+      <width>631</width>
+      <height>411</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cadastro acolhidos
+	Preencha todos os campos obrigátórios(nome, rg, cpf, nascimento) na tela inicial e clique em 'cadastrar' para realizar o cadastro.
+
+Visualização dos acolhidos
+	Para visualizar a lista de todos os acolhidos clique em 'ver cadastrados'.
+	Para visualizar todos os dados de um acolhido e seus tratamentos digite seu id no campo 'id a ser visto' e clique em 'visualizar tudo'.
+	Para excluir um cadastro de um acolhido dgite seu id no campo 'id a ser excluido' e clique em 'excluir'.	
+	*O id do acolhido é necessário para o cadastro de tratamentos
+
+Medicamentos
+	Os medicamentos deverão ser cadastrados previamente ao cadastro uma nova entrada ou tratamento (caso não tenha sido cadastrado anteriormente)
+
+	Cadastro/visualização
+		Para cadastrar um novo medicamento clique em 'medicamentos' na tela inicial, preencha os campos obrigatórios (nome do medicamento) e clique em 'cadastar medicamento'
+		Para visualizar a lista de medicamentos cadastrados, clique em 'medicamentos' na tela inicial.
+		*O id do medicamento é necessário para o cadastro de entradas e tratamentos
+
+Entradas
+	Cadastro/visualização
+		Para cadastar uma nova entrada clique em 'entrada med' na tela inicial, preencha os campos obrigatórios e clique em 'cadastrar'.
+		*No campo 'id medicamento' digite o id do medicamento(verificar em 'medicamentos') que foi recebido.
+		Para visualizar a lista de entradas clique em 'entrada med' na tela inicial.
+
+Tratamentos
+	Cadastro/visualização
+		Para cadastrar um novo tratamento clique em 'tratamentos' na tela inicial, preencha todos os campos obrigatórios(id acolhido, id medicamento) e clique em 'cadastrar'.
+		*No campo 'id acolhido' digite o id do acolhido (verificar em 'ver cadastrados')cujo tratamento vai ser cadastrado.
+		*No campo 'id medicamento' digite o id do medicamento (verificar em 'medicamentos') do medicamento a ser usado no tratamento.
+		Para visualizar a lista com todos os tratamentos clique em 'tratamentos' na tela inicial.
+
+*Para voltar para tela anterior feche a janela atual
+</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>711</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
