@@ -45,6 +45,28 @@ def cadastrar_acolhido():
                                       str(cpf_responsavel), str(vinculo), str(entrada), str(saida), str(obs)))
     banco.commit()
 
+    acolhido.edtNome.setText('')
+    acolhido.edtRG.setText('')
+    acolhido.edtCPF.setText('')
+    acolhido.edtNascimento.setText('')
+    acolhido.edtECivil.setText('')
+    acolhido.edtFilho.setText('')
+    acolhido.edtTrabalho.setText('')
+    acolhido.edtPSaude.setText('')
+    acolhido.edtLazer.setText('')
+    acolhido.edtSubst.setText('')
+    acolhido.edtTUso.setText('')
+    acolhido.edtReligiao.setText('')
+    acolhido.edtResponsavel.setText('')
+    acolhido.edtReRG.setText('')
+    acolhido.edtReCPF.setText('')
+    acolhido.edtVinculo.setText('')
+    acolhido.edtEntrada.setText('')
+    acolhido.edtSaida.setText('')
+    acolhido.edtObs.setText('')
+
+    acolhido.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+
 # Ver acolhidos cadastrados -->
 def verCadastro():
     cadastrado.show()
@@ -92,6 +114,11 @@ def cadastrar_medicamento():
                 VALUES (?, ?, ?)''',(str(nome), str(espec), str(obs)))
     banco.commit()
 
+    cadMedicamento.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+    cadMedicamento.edtNomeMed.setText('')
+    cadMedicamento.edtObs.setText('')
+    cadMedicamento.edtEsp.setText('')
+
     comando_SQL = ("""SELECT * FROM medicamentos""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
@@ -131,6 +158,12 @@ def cadastrar_entrada():
                 VALUES (?, ?, ?, ?)""", (str(id_medicamento), str(qtd_entrada), str(data_entrada), str(obs)))
 
     banco.commit()
+
+    cadEntradaMedicamento.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+    cadEntradaMedicamento.edtIdMed.setText('')
+    cadEntradaMedicamento.edtQtdMed.setText('')
+    cadEntradaMedicamento.edtDataMed.setText('')
+    cadEntradaMedicamento.edtObs.setText('')
 
     comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
         JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;""")
@@ -178,6 +211,28 @@ def cadastrar_tratamento():
                 str(qtd_dose), str(frequencia), str(inicio), str(termino), str(obs)))
 
     banco.commit()
+
+    comando_SQL = ("""SELECT a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
+        c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
+        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento;""")
+    c.execute(comando_SQL)
+    lidos = c.fetchall()
+    print(lidos)
+    tratamento.tabelaTratamento.setRowCount(len(lidos))
+    tratamento.tabelaTratamento.setColumnCount(8)
+
+    for i in range(len(lidos)):
+        for j in range(8):
+            tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
+    tratamento.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+    tratamento.edtIAcolhido.setText('')
+    tratamento.edtIMedicamento.setText('')
+    tratamento.edtDose.setText('')
+    tratamento.edtFrequencia.setText('')
+    tratamento.edtInicio.setText('')
+    tratamento.edtTermino.setText('')
+    tratamento.edtOBS.setText('')
 
 # Excluir cadastrados --> OK
 def excluirDado():
