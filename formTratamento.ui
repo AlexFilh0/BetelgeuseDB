@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Tratamentos</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -184,7 +184,7 @@
    <widget class="QPushButton" name="btnCadastrarTratamento">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>280</x>
       <y>140</y>
       <width>121</width>
       <height>41</height>
@@ -195,9 +195,6 @@
     </property>
    </widget>
    <widget class="QTableWidget" name="tabelaTratamento">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
     <property name="geometry">
      <rect>
       <x>15</x>
@@ -246,19 +243,6 @@
       <string>OBS</string>
      </property>
     </column>
-   </widget>
-   <widget class="QLabel" name="lblAviso">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>150</y>
-      <width>241</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
