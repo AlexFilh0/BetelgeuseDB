@@ -306,7 +306,7 @@
      <string>_______________________________________________________________________________________________________________________________</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="tabelaTratamento">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -315,11 +315,6 @@
       <height>201</height>
      </rect>
     </property>
-    <column>
-     <property name="text">
-      <string>NOME</string>
-     </property>
-    </column>
     <column>
      <property name="text">
       <string>MEDICAMENTO</string>

@@ -187,7 +187,7 @@ def tratamentos_abrir():
     JOIN medicamentos as m on c.id_medicamento = m.id_medicamento;""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
-    print(lidos)
+
     tratamento.tabelaTratamento.setRowCount(len(lidos))
     tratamento.tabelaTratamento.setColumnCount(8)
 
@@ -280,6 +280,20 @@ def visualizarDado():
     visual.lblEntrada.setText(infoGet[16])
     visual.lblSaida.setText(infoGet[17])
     visual.lblOBS.setText(infoGet[18])
+
+    cursor.execute("""SELECT m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
+        c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
+        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento WHERE c.id_acolhido =?;""", (str(idVer)))
+
+    lidos = cursor.fetchall()
+
+    visual.tabelaTratamento.setRowCount(len(lidos))
+    visual.tabelaTratamento.setColumnCount(7)
+
+    for i in range(len(lidos)):
+        for j in range(7):
+            visual.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
 
 app = QtWidgets.QApplication([])
 
