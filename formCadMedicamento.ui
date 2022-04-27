@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Medicamentos</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../Downloads/pngwing.com (2).png</normaloff>../../Downloads/pngwing.com (2).png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
     <property name="geometry">

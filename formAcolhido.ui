@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Tela Inicial</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../Downloads/pngwing.com.png</normaloff>../../Downloads/pngwing.com.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -299,7 +303,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>AAA-MM-DD</string>
+     <string>AAAA-MM-DD</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_14">
@@ -325,7 +329,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>AAA-MM-DD</string>
+     <string>AAAA-MM-DD</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_15">

@@ -1,9 +1,10 @@
 from PyQt5 import uic,QtWidgets
 import sqlite3
+from datetime import date
 
 from banco import criacao_banco
 
-# numero_id = 0
+data_atual = date.today()
 
 # executa o metodo de criação do banco que será executado apenas na primeira vez que o programa é aberto no pc
 criacao_banco()
@@ -33,15 +34,32 @@ def cadastrar_acolhido():
     saida = acolhido.edtSaida.text()
     obs = acolhido.edtObs.text()
 
+    # verifica se algum dado foi preenchido se não foi é atribuido o valor DEFAULT
+    if estado_civil == '':
+        estado_civil = 'solteiro'
+
+    if qtd_filhos == '':
+        qtd_filhos = '0'
+
+    if trabalho == '':
+        trabalho = 'desempregado'
+
+    if entrada == 'AAAA-MM-DD' or entrada == '':
+        entrada = data_atual
+
+    # muda AAAA-MM-DD se não for apagado no formulário
+    if saida == 'AAAA-MM-DD':
+        saida = '-'
+
     cursor = banco.cursor()
     cursor.execute('''INSERT INTO acolhidos (nome, rg, cpf, nascimento, estado_civil,
                     qtd_filhos, trabalho, posto_saude, lazer, substancia_favorita,
                     uso_desde_idade, religiao, responsavel, rg_responsavel, cpf_responsavel,
                     vinculo_responsavel, entrada, saida, obs)
                     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''', (str(nome), str(rg), str(cpf), str(nascimento),
-                                      str(estado_civil), int(qtd_filhos), str(trabalho),
+                                      str(estado_civil), str(qtd_filhos), str(trabalho),
                                       str(posto_saude), str(lazer), str(substancia_favorita),
-                                      int(usoAno), str(religiao), str(responsavel), str(rg_responsavel),
+                                      str(usoAno), str(religiao), str(responsavel), str(rg_responsavel),
                                       str(cpf_responsavel), str(vinculo), str(entrada), str(saida), str(obs)))
     banco.commit()
 
@@ -152,6 +170,10 @@ def cadastrar_entrada():
     data_entrada = cadEntradaMedicamento.edtDataMed.text()
     obs = cadEntradaMedicamento.edtObs.text()
 
+    # verifica se algum dado foi preenchido se não foi é atribuido o valor DEFAULT
+    if data_entrada == 'AAAA-MM-DD' or data_entrada == '':
+        data_entrada = data_atual
+
     c = banco.cursor()
 
     c.execute("""INSERT INTO entradas_medicamentos (id_medicamento, qtd_entrada, data_entrada, obs)
@@ -184,7 +206,7 @@ def tratamentos_abrir():
 
     comando_SQL = ("""SELECT a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
     c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
-    JOIN medicamentos as m on c.id_medicamento = m.id_medicamento;""")
+    JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
 
@@ -203,6 +225,14 @@ def cadastrar_tratamento():
     inicio = tratamento.edtInicio.text()
     termino = tratamento.edtTermino.text()
     obs = tratamento.edtOBS.text()
+
+    # verifica se algum dado foi preenchido se não foi é atribuido o valor DEFAULT
+    if termino == 'AAAA-MM-DD' or termino == '':
+        termino = 'indefinido'
+
+    # muda AAAA-MM-DD se não for apagado no formulário
+    if inicio == 'AAAA-MM-DD':
+        inicio = ''
 
     c = banco.cursor()
 
@@ -258,7 +288,7 @@ def visualizarDado():
      lazer, substancia_favorita, uso_desde_idade,
      religiao, responsavel, rg_responsavel,
      cpf_responsavel, vinculo_responsavel,
-     entrada, saida, obs FROM acolhidos WHERE id_acolhido=?""", (str(idVer)))
+     entrada, saida, obs FROM acolhidos WHERE id_acolhido="""+ (str(idVer)))
 
     infoGet = cursor.fetchone()
     visual.lblNome.setText(infoGet[0])
@@ -283,7 +313,7 @@ def visualizarDado():
 
     cursor.execute("""SELECT m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
         c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
-        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento WHERE c.id_acolhido =?;""", (str(idVer)))
+        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento WHERE c.termino_tratamento >= current_date AND c.id_acolhido ="""+ (str(idVer)))
 
     lidos = cursor.fetchall()
 
