@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../Downloads/pngwing.com (3).png</normaloff>../../Downloads/pngwing.com (3).png</iconset>
+    <normaloff>imagens/acolhidos icon.png</normaloff>imagens/acolhidos icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
