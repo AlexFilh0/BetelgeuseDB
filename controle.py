@@ -244,7 +244,7 @@ def cadastrar_tratamento():
 
     comando_SQL = ("""SELECT a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
         c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
-        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento;""")
+        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
     print(lidos)
