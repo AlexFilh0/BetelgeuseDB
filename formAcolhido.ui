@@ -59,6 +59,9 @@
     <property name="text">
      <string>AAAA-MM-DD</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
@@ -298,18 +301,21 @@
      <rect>
       <x>340</x>
       <y>140</y>
-      <width>71</width>
+      <width>81</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>AAAA-MM-DD</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>430</x>
       <y>140</y>
       <width>41</width>
       <height>21</height>
@@ -322,27 +328,17 @@
    <widget class="QLineEdit" name="edtSaida">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>470</x>
       <y>140</y>
-      <width>71</width>
+      <width>81</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>AAAA-MM-DD</string>
     </property>
-   </widget>
-   <widget class="QLabel" name="label_15">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>160</y>
-      <width>711</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>_______________________________________________________________________________________________________________________________</string>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="label_16">
@@ -456,8 +452,8 @@
    <widget class="QPushButton" name="btnVer">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>370</y>
+      <x>30</x>
+      <y>440</y>
       <width>121</width>
       <height>51</height>
      </rect>
@@ -502,23 +498,10 @@
      <string>POSTO DE SAÚDE:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_22">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>350</y>
-      <width>711</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>_______________________________________________________________________________________________________________________________</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnMedicamento">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>200</x>
       <y>440</y>
       <width>121</width>
       <height>51</height>
@@ -533,7 +516,7 @@
      <rect>
       <x>70</x>
       <y>250</y>
-      <width>601</width>
+      <width>611</width>
       <height>71</height>
      </rect>
     </property>
@@ -541,7 +524,7 @@
    <widget class="QPushButton" name="btnEntradaMed">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>380</x>
       <y>440</y>
       <width>121</width>
       <height>51</height>
@@ -554,7 +537,7 @@
    <widget class="QPushButton" name="btnTratamento">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>560</x>
       <y>440</y>
       <width>121</width>
       <height>51</height>
@@ -567,10 +550,10 @@
    <widget class="QPushButton" name="btnAjuda">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>490</y>
-      <width>121</width>
-      <height>51</height>
+      <x>610</x>
+      <y>520</y>
+      <width>71</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -588,6 +571,32 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>340</y>
+      <width>711</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>170</y>
+      <width>711</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
   </widget>
