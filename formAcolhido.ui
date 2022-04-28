@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../Downloads/pngwing.com.png</normaloff>../../Downloads/pngwing.com.png</iconset>
+    <normaloff>imagens/tela incial icon.png</normaloff>imagens/tela incial icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
