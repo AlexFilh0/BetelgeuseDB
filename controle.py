@@ -66,7 +66,7 @@ def cadastrar_acolhido():
     acolhido.edtNome.setText('')
     acolhido.edtRG.setText('')
     acolhido.edtCPF.setText('')
-    acolhido.edtNascimento.setText('')
+    acolhido.edtNascimento.setText('AAAA-MM-DD')
     acolhido.edtECivil.setText('')
     acolhido.edtFilho.setText('')
     acolhido.edtTrabalho.setText('')
@@ -79,8 +79,8 @@ def cadastrar_acolhido():
     acolhido.edtReRG.setText('')
     acolhido.edtReCPF.setText('')
     acolhido.edtVinculo.setText('')
-    acolhido.edtEntrada.setText('')
-    acolhido.edtSaida.setText('')
+    acolhido.edtEntrada.setText('AAAA-MM-DD')
+    acolhido.edtSaida.setText('AAAA-MM-DD')
     acolhido.edtObs.setText('')
 
     acolhido.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
@@ -105,6 +105,9 @@ def verCadastro():
 # Ver medicamentos --> OK
 def medicamentos_abrir():
     cadMedicamento.show()
+
+    cadMedicamento.lblAviso.setText('')
+
     c = banco.cursor()
 
 
@@ -150,6 +153,9 @@ def cadastrar_medicamento():
 # Entrada --> OK
 def entradas_abrir():
     cadEntradaMedicamento.show()
+
+    cadEntradaMedicamento.lblAviso.setText('')
+
     c = banco.cursor()
 
     comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
@@ -184,7 +190,7 @@ def cadastrar_entrada():
     cadEntradaMedicamento.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
     cadEntradaMedicamento.edtIdMed.setText('')
     cadEntradaMedicamento.edtQtdMed.setText('')
-    cadEntradaMedicamento.edtDataMed.setText('')
+    cadEntradaMedicamento.edtDataMed.setText('AAAA-MM-DD')
     cadEntradaMedicamento.edtObs.setText('')
 
     comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
@@ -201,6 +207,8 @@ def cadastrar_entrada():
 # Tratamento
 def tratamentos_abrir():
     tratamento.show()
+
+    tratamento.lblAviso.setText('')
 
     c = banco.cursor()
 
@@ -260,8 +268,8 @@ def cadastrar_tratamento():
     tratamento.edtIMedicamento.setText('')
     tratamento.edtDose.setText('')
     tratamento.edtFrequencia.setText('')
-    tratamento.edtInicio.setText('')
-    tratamento.edtTermino.setText('')
+    tratamento.edtInicio.setText('AAAA-MM-DD')
+    tratamento.edtTermino.setText('AAAA-MM-DD')
     tratamento.edtOBS.setText('')
 
 # Excluir cadastrados --> OK
@@ -356,6 +364,8 @@ tratamento.btnCadastrarTratamento.clicked.connect(cadastrar_tratamento)
 
 
 acolhido.show()
+
+acolhido.lblAviso.setText('')
 
 app.exec()
 
