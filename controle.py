@@ -275,14 +275,24 @@ def cadastrar_tratamento():
 # Excluir cadastrados --> OK
 def excluirDado():
     excluir = cadastrado.edtExcluir.text()
-    cadastrado.tabela.removeRow(int(excluir)-1)
 
+    comando_SQL = "SELECT * FROM acolhidos"
     cursor = banco.cursor()
+    cursor.execute(comando_SQL)
+    lidos = cursor.fetchall()
 
-    cursor.execute("DELETE FROM acolhidos WHERE id_acolhido="+ str(excluir))
+    cursor.execute("DELETE FROM acolhidos WHERE id_acolhido=" + str(excluir))
     banco.commit()
 
-    #Colocar label para atualizar
+    cadastrado.tabela.setRowCount(len(lidos))
+    cadastrado.tabela.setColumnCount(3)
+
+    for i in range(len(lidos)):
+        for j in range(3):
+            cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+    cursor = banco.cursor()
+
+    cadastrado.lblAviso.setText('DADO EXLCUIDO COM SUCESSO!')
 
 # Visualizar dados cadastradps -->
 def visualizarDado():

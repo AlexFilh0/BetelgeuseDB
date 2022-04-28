@@ -10,6 +10,12 @@
     <height>583</height>
    </rect>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>711</width>
+    <height>583</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Medicamentos</string>
   </property>
