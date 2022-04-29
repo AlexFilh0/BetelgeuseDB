@@ -12,7 +12,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>712</width>
+    <width>711</width>
     <height>600</height>
    </size>
   </property>
@@ -193,19 +193,6 @@
      <string>SAÍDA:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_15">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>160</y>
-      <width>711</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>_______________________________________________________________________________________________________________________________</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_16">
     <property name="geometry">
      <rect>
@@ -258,19 +245,6 @@
      <string>RG:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lblAviso">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>280</y>
-      <width>541</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_20">
     <property name="geometry">
      <rect>
@@ -297,26 +271,13 @@
      <string>POSTO DE SAÚDE:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_22">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>320</y>
-      <width>711</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>_______________________________________________________________________________________________________________________________</string>
-    </property>
-   </widget>
    <widget class="QTableWidget" name="tabelaTratamento">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>350</y>
+      <y>320</y>
       <width>691</width>
-      <height>201</height>
+      <height>231</height>
      </rect>
     </property>
     <column>
@@ -600,6 +561,32 @@
     </property>
     <property name="text">
      <string>______________________________________________________</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>170</y>
+      <width>711</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>279</y>
+      <width>711</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
   </widget>

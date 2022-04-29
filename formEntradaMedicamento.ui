@@ -10,6 +10,12 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>711</width>
+    <height>600</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Entrada de medicamentos</string>
   </property>
@@ -21,8 +27,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>40</y>
+      <x>30</x>
+      <y>20</y>
       <width>111</width>
       <height>21</height>
      </rect>
@@ -34,8 +40,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>40</y>
+      <x>190</x>
+      <y>20</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -47,10 +53,10 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>40</y>
+      <x>330</x>
+      <y>20</y>
       <width>47</width>
-      <height>13</height>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
@@ -60,10 +66,10 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>40</y>
+      <x>460</x>
+      <y>20</y>
       <width>47</width>
-      <height>13</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -73,9 +79,9 @@
    <widget class="QLineEdit" name="edtIdMed">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>40</y>
-      <width>51</width>
+      <x>140</x>
+      <y>20</y>
+      <width>41</width>
       <height>20</height>
      </rect>
     </property>
@@ -83,8 +89,8 @@
    <widget class="QLineEdit" name="edtQtdMed">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>40</y>
+      <x>270</x>
+      <y>20</y>
       <width>51</width>
       <height>20</height>
      </rect>
@@ -93,18 +99,24 @@
    <widget class="QLineEdit" name="edtDataMed">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>40</y>
-      <width>51</width>
+      <x>370</x>
+      <y>20</y>
+      <width>81</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>AAAA-MM-DD</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="edtObs">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>40</y>
+      <x>490</x>
+      <y>20</y>
       <width>191</width>
       <height>20</height>
      </rect>
@@ -113,10 +125,10 @@
    <widget class="QPushButton" name="btnCadastrarMed">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>90</y>
+      <x>30</x>
+      <y>50</y>
       <width>111</width>
-      <height>41</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -130,9 +142,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>170</y>
+      <y>90</y>
       <width>651</width>
-      <height>331</height>
+      <height>461</height>
      </rect>
     </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
@@ -172,10 +184,10 @@
    <widget class="QLabel" name="lblAviso">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>100</y>
+      <x>310</x>
+      <y>60</y>
       <width>241</width>
-      <height>20</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">

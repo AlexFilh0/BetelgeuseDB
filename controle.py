@@ -66,7 +66,7 @@ def cadastrar_acolhido():
     acolhido.edtNome.setText('')
     acolhido.edtRG.setText('')
     acolhido.edtCPF.setText('')
-    acolhido.edtNascimento.setText('')
+    acolhido.edtNascimento.setText('AAAA-MM-DD')
     acolhido.edtECivil.setText('')
     acolhido.edtFilho.setText('')
     acolhido.edtTrabalho.setText('')
@@ -79,8 +79,8 @@ def cadastrar_acolhido():
     acolhido.edtReRG.setText('')
     acolhido.edtReCPF.setText('')
     acolhido.edtVinculo.setText('')
-    acolhido.edtEntrada.setText('')
-    acolhido.edtSaida.setText('')
+    acolhido.edtEntrada.setText('AAAA-MM-DD')
+    acolhido.edtSaida.setText('AAAA-MM-DD')
     acolhido.edtObs.setText('')
 
     acolhido.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
@@ -105,6 +105,9 @@ def verCadastro():
 # Ver medicamentos --> OK
 def medicamentos_abrir():
     cadMedicamento.show()
+
+    cadMedicamento.lblAviso.setText('')
+
     c = banco.cursor()
 
 
@@ -150,6 +153,9 @@ def cadastrar_medicamento():
 # Entrada --> OK
 def entradas_abrir():
     cadEntradaMedicamento.show()
+
+    cadEntradaMedicamento.lblAviso.setText('')
+
     c = banco.cursor()
 
     comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
@@ -184,7 +190,7 @@ def cadastrar_entrada():
     cadEntradaMedicamento.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
     cadEntradaMedicamento.edtIdMed.setText('')
     cadEntradaMedicamento.edtQtdMed.setText('')
-    cadEntradaMedicamento.edtDataMed.setText('')
+    cadEntradaMedicamento.edtDataMed.setText('AAAA-MM-DD')
     cadEntradaMedicamento.edtObs.setText('')
 
     comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
@@ -201,6 +207,8 @@ def cadastrar_entrada():
 # Tratamento
 def tratamentos_abrir():
     tratamento.show()
+
+    tratamento.lblAviso.setText('')
 
     c = banco.cursor()
 
@@ -244,7 +252,7 @@ def cadastrar_tratamento():
 
     comando_SQL = ("""SELECT a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
         c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
-        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento;""")
+        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
     print(lidos)
@@ -260,21 +268,31 @@ def cadastrar_tratamento():
     tratamento.edtIMedicamento.setText('')
     tratamento.edtDose.setText('')
     tratamento.edtFrequencia.setText('')
-    tratamento.edtInicio.setText('')
-    tratamento.edtTermino.setText('')
+    tratamento.edtInicio.setText('AAAA-MM-DD')
+    tratamento.edtTermino.setText('AAAA-MM-DD')
     tratamento.edtOBS.setText('')
 
 # Excluir cadastrados --> OK
 def excluirDado():
     excluir = cadastrado.edtExcluir.text()
-    cadastrado.tabela.removeRow(int(excluir)-1)
 
+    comando_SQL = "SELECT * FROM acolhidos"
     cursor = banco.cursor()
+    cursor.execute(comando_SQL)
+    lidos = cursor.fetchall()
 
-    cursor.execute("DELETE FROM acolhidos WHERE id_acolhido="+ str(excluir))
+    cursor.execute("DELETE FROM acolhidos WHERE id_acolhido=" + str(excluir))
     banco.commit()
 
-    #Colocar label para atualizar
+    cadastrado.tabela.setRowCount(len(lidos))
+    cadastrado.tabela.setColumnCount(3)
+
+    for i in range(len(lidos)):
+        for j in range(3):
+            cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+    cursor = banco.cursor()
+
+    cadastrado.lblAviso.setText('DADO EXLCUIDO COM SUCESSO!')
 
 # Visualizar dados cadastradps -->
 def visualizarDado():
@@ -356,6 +374,8 @@ tratamento.btnCadastrarTratamento.clicked.connect(cadastrar_tratamento)
 
 
 acolhido.show()
+
+acolhido.lblAviso.setText('')
 
 app.exec()
 
