@@ -89,7 +89,7 @@ def cadastrar_acolhido():
 def verCadastro():
     cadastrado.show()
 
-    comando_SQL = "SELECT * FROM acolhidos"
+    comando_SQL = "SELECT * FROM acolhidos ORDER BY nome"
     cursor = banco.cursor()
     cursor.execute(comando_SQL)
     lidos = cursor.fetchall()
@@ -161,6 +161,22 @@ def cadastrar_medicamento():
     comando_SQL = ("""SELECT * FROM medicamentos""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
+    cadMedicamento.tabelaCadastro.setRowCount(len(lidos))
+    cadMedicamento.tabelaCadastro.setColumnCount(4)
+
+    for i in range(len(lidos)):
+        for j in range(4):
+            cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
+def pesquisarMedicamentos():
+    pesquisa = cadMedicamento.edtPesquisa.text()
+
+    c = banco.cursor()
+
+    c.execute("""SELECT * FROM medicamentos WHERE nome LIKE '%""" + pesquisa + """%' ORDER BY nome""")
+
+    lidos = c.fetchall()
+
     cadMedicamento.tabelaCadastro.setRowCount(len(lidos))
     cadMedicamento.tabelaCadastro.setColumnCount(4)
 
@@ -391,6 +407,7 @@ cadastrado.btnVisualizar.clicked.connect(visualizarDado)
 cadastrado.btnPesquisar.clicked.connect(pesquisarAcolhido)
 
 cadMedicamento.btnCadastrarMed.clicked.connect(cadastrar_medicamento)
+cadMedicamento.btnPesquisar.clicked.connect(pesquisarMedicamentos)
 
 cadEntradaMedicamento.btnCadastrarMed.clicked.connect(cadastrar_entrada)
 

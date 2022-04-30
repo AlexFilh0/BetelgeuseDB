@@ -194,14 +194,17 @@
    <widget class="QLabel" name="lblAviso">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>530</y>
-      <width>171</width>
+      <x>30</x>
+      <y>540</y>
+      <width>221</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="edtPesquisa">
