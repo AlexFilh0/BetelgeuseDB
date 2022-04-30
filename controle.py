@@ -102,6 +102,24 @@ def verCadastro():
         for j in range(3):
             cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
+
+def pesquisarAcolhido():
+    pesquisa = cadastrado.edtPesquisa.text()
+
+    c = banco.cursor()
+
+    c.execute("""SELECT * FROM acolhidos WHERE nome LIKE '%""" + pesquisa + """%' ORDER BY nome""")
+
+    lidos = c.fetchall()
+
+    cadastrado.tabela.setRowCount(len(lidos))
+    cadastrado.tabela.setColumnCount(3)
+
+    for i in range(len(lidos)):
+        for j in range(3):
+            cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
+
 # Ver medicamentos --> OK
 def medicamentos_abrir():
     cadMedicamento.show()
@@ -276,13 +294,16 @@ def cadastrar_tratamento():
 def excluirDado():
     excluir = cadastrado.edtExcluir.text()
 
-    comando_SQL = "SELECT * FROM acolhidos"
     cursor = banco.cursor()
-    cursor.execute(comando_SQL)
-    lidos = cursor.fetchall()
 
     cursor.execute("DELETE FROM acolhidos WHERE id_acolhido=" + str(excluir))
     banco.commit()
+
+    cadastrado.edtExcluir.setText('')
+
+    comando_SQL = "SELECT * FROM acolhidos"
+    cursor.execute(comando_SQL)
+    lidos = cursor.fetchall()
 
     cadastrado.tabela.setRowCount(len(lidos))
     cadastrado.tabela.setColumnCount(3)
@@ -292,7 +313,7 @@ def excluirDado():
             cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
     cursor = banco.cursor()
 
-    cadastrado.lblAviso.setText('DADO EXLCUIDO COM SUCESSO!')
+    cadastrado.lblAviso.setText('DADO EXLCUÍDO COM SUCESSO!')
 
 # Visualizar dados cadastradps -->
 def visualizarDado():
@@ -307,6 +328,8 @@ def visualizarDado():
      religiao, responsavel, rg_responsavel,
      cpf_responsavel, vinculo_responsavel,
      entrada, saida, obs FROM acolhidos WHERE id_acolhido="""+ (str(idVer)))
+
+    cadastrado.edtVisualizar.setText('')
 
     infoGet = cursor.fetchone()
     visual.lblNome.setText(infoGet[0])
@@ -365,6 +388,7 @@ acolhido.btnAjuda.clicked.connect(ajuda_abrir)
 
 cadastrado.btnExcluir.clicked.connect(excluirDado)
 cadastrado.btnVisualizar.clicked.connect(visualizarDado)
+cadastrado.btnPesquisar.clicked.connect(pesquisarAcolhido)
 
 cadMedicamento.btnCadastrarMed.clicked.connect(cadastrar_medicamento)
 
