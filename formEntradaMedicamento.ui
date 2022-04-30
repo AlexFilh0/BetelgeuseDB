@@ -144,7 +144,7 @@
       <x>30</x>
       <y>90</y>
       <width>651</width>
-      <height>461</height>
+      <height>441</height>
      </rect>
     </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
@@ -192,6 +192,19 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>540</y>
+      <width>271</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>*Verificar id do medicamento na tela de medicamentos</string>
     </property>
    </widget>
   </widget>
