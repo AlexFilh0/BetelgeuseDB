@@ -236,10 +236,11 @@ def entradas_abrir():
     cadEntradaMedicamento.show()
 
     cadEntradaMedicamento.lblAviso.setText('')
+    cadEntradaMedicamento.lblAviso_2.setText('')
 
     c = banco.cursor()
 
-    comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
+    comando_SQL = ("""SELECT e.id_entrada, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
     JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
@@ -274,7 +275,7 @@ def cadastrar_entrada():
     cadEntradaMedicamento.edtDataMed.setText('AAAA-MM-DD')
     cadEntradaMedicamento.edtObs.setText('')
 
-    comando_SQL = ("""SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
+    comando_SQL = ("""SELECT e.id_entrada, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
         JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
@@ -285,6 +286,31 @@ def cadastrar_entrada():
         for j in range(6):
             cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
+def excluir_entrada():
+    excluir = cadEntradaMedicamento.edtExcluir.text()
+
+    cursor = banco.cursor()
+
+    cursor.execute("DELETE FROM entradas_medicamentos WHERE id_entrada=" + str(excluir))
+    banco.commit()
+
+    cadEntradaMedicamento.edtExcluir.setText('')
+
+    comando_SQL = """SELECT e.id_entrada, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
+        JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;"""
+    cursor.execute(comando_SQL)
+    lidos = cursor.fetchall()
+
+    cadEntradaMedicamento.tabelaEntrada.setRowCount(len(lidos))
+    cadEntradaMedicamento.tabelaEntrada.setColumnCount(6)
+
+    for i in range(len(lidos)):
+        for j in range(6):
+            cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+    cursor = banco.cursor()
+
+    cadEntradaMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
+
 # Tratamento
 def tratamentos_abrir():
     tratamento.show()
@@ -293,17 +319,17 @@ def tratamentos_abrir():
 
     c = banco.cursor()
 
-    comando_SQL = ("""SELECT a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
+    comando_SQL = ("""SELECT c.id_tratamento, a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
     c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
     JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
 
     tratamento.tabelaTratamento.setRowCount(len(lidos))
-    tratamento.tabelaTratamento.setColumnCount(8)
+    tratamento.tabelaTratamento.setColumnCount(9)
 
     for i in range(len(lidos)):
-        for j in range(8):
+        for j in range(9):
             tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
 def cadastrar_tratamento():
@@ -331,17 +357,17 @@ def cadastrar_tratamento():
 
     banco.commit()
 
-    comando_SQL = ("""SELECT a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
+    comando_SQL = ("""SELECT c.id_tratamento, a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
         c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
         JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
     print(lidos)
     tratamento.tabelaTratamento.setRowCount(len(lidos))
-    tratamento.tabelaTratamento.setColumnCount(8)
+    tratamento.tabelaTratamento.setColumnCount(9)
 
     for i in range(len(lidos)):
-        for j in range(8):
+        for j in range(9):
             tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
     tratamento.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
@@ -354,7 +380,30 @@ def cadastrar_tratamento():
     tratamento.edtOBS.setText('')
 
 def excluir_tratamento():
-    print('as')
+    excluir = tratamento.edtExcluir.text()
+
+    cursor = banco.cursor()
+
+    cursor.execute("DELETE FROM controle_medicamentos WHERE id_tratamento=" + str(excluir))
+    banco.commit()
+
+    tratamento.edtExcluir.setText('')
+
+    comando_SQL = """SELECT c.id_tratamento, a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
+        c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
+        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;"""
+    cursor.execute(comando_SQL)
+    lidos = cursor.fetchall()
+
+    tratamento.tabelaTratamento.setRowCount(len(lidos))
+    tratamento.tabelaTratamento.setColumnCount(9)
+
+    for i in range(len(lidos)):
+        for j in range(9):
+            tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+    cursor = banco.cursor()
+
+    tratamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
 
 # Visualizar dados cadastradps -->
 def visualizar_dado():
@@ -436,8 +485,10 @@ cadMedicamento.btnPesquisar.clicked.connect(pesquisar_medicamentos)
 cadMedicamento.btnExcluir.clicked.connect(excluir_medicamento)
 
 cadEntradaMedicamento.btnCadastrarMed.clicked.connect(cadastrar_entrada)
+cadEntradaMedicamento.btnExcluir.clicked.connect(excluir_entrada)
 
 tratamento.btnCadastrarTratamento.clicked.connect(cadastrar_tratamento)
+tratamento.btnExcluir.clicked.connect(excluir_tratamento)
 
 
 acolhido.show()
