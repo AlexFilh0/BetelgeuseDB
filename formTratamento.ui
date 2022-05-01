@@ -200,10 +200,10 @@
    <widget class="QPushButton" name="btnCadastrarTratamento">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>60</x>
       <y>110</y>
       <width>121</width>
-      <height>41</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -216,10 +216,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>15</x>
-      <y>201</y>
+      <x>10</x>
+      <y>150</y>
       <width>681</width>
-      <height>331</height>
+      <height>351</height>
      </rect>
     </property>
     <column>
@@ -266,9 +266,9 @@
    <widget class="QLabel" name="lblAviso">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>160</y>
-      <width>241</width>
+      <x>200</x>
+      <y>120</y>
+      <width>441</width>
       <height>20</height>
      </rect>
     </property>
@@ -300,6 +300,58 @@
     </property>
     <property name="text">
      <string>*Verificar id do medicamento na tela de medicamentos</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblAviso_2">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>510</y>
+      <width>221</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>510</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ID A SER EXCLUÍDO</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="edtExcluir">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>510</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnExcluir">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>510</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>EXCLUIR</string>
     </property>
    </widget>
   </widget>

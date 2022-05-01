@@ -115,7 +115,7 @@
       <x>30</x>
       <y>130</y>
       <width>651</width>
-      <height>411</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -149,13 +149,16 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>90</y>
-      <width>241</width>
+      <y>70</y>
+      <width>371</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="edtPesquisa">
@@ -183,6 +186,58 @@
     <property name="icon">
      <iconset>
       <normaloff>imagens/pesquisa icon.png</normaloff>imagens/pesquisa icon.png</iconset>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>520</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ID A SER EXCLUÍDO</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="edtExcluir">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>520</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblAviso_2">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>520</y>
+      <width>221</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnExcluir">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>520</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>EXCLUIR</string>
     </property>
    </widget>
   </widget>

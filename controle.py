@@ -102,7 +102,6 @@ def ver_cadastro():
         for j in range(3):
             cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-
 def pesquisar_acolhido():
     pesquisa = cadastrado.edtPesquisa.text()
 
@@ -119,17 +118,41 @@ def pesquisar_acolhido():
         for j in range(3):
             cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
+def excluir_dado_acolhido():
+    excluir = cadastrado.edtExcluir.text()
+
+    cursor = banco.cursor()
+
+    cursor.execute("DELETE FROM acolhidos WHERE id_acolhido=" + str(excluir))
+    banco.commit()
+
+    cadastrado.edtExcluir.setText('')
+
+    comando_SQL = "SELECT * FROM acolhidos"
+    cursor.execute(comando_SQL)
+    lidos = cursor.fetchall()
+
+    cadastrado.tabela.setRowCount(len(lidos))
+    cadastrado.tabela.setColumnCount(3)
+
+    for i in range(len(lidos)):
+        for j in range(3):
+            cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+    cursor = banco.cursor()
+
+    cadastrado.lblAviso.setText('DADO EXLCUÍDO COM SUCESSO!')
 
 # Ver medicamentos --> OK
 def medicamentos_abrir():
     cadMedicamento.show()
 
     cadMedicamento.lblAviso.setText('')
+    cadMedicamento.lblAviso_2.setText('')
 
     c = banco.cursor()
 
 
-    comando_SQL = ("""SELECT * FROM medicamentos""")
+    comando_SQL = ("""SELECT * FROM medicamentos ORDER BY nome""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
     cadMedicamento.tabelaCadastro.setRowCount(len(lidos))
@@ -158,7 +181,7 @@ def cadastrar_medicamento():
     cadMedicamento.edtObs.setText('')
     cadMedicamento.edtEsp.setText('')
 
-    comando_SQL = ("""SELECT * FROM medicamentos""")
+    comando_SQL = ("""SELECT * FROM medicamentos ORDER BY nome""")
     c.execute(comando_SQL)
     lidos = c.fetchall()
     cadMedicamento.tabelaCadastro.setRowCount(len(lidos))
@@ -183,6 +206,30 @@ def pesquisar_medicamentos():
     for i in range(len(lidos)):
         for j in range(4):
             cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
+def excluir_medicamento():
+    excluir = cadMedicamento.edtExcluir.text()
+
+    cursor = banco.cursor()
+
+    cursor.execute("DELETE FROM medicamentos WHERE id_medicamento=" + str(excluir))
+    banco.commit()
+
+    cadMedicamento.edtExcluir.setText('')
+
+    comando_SQL = "SELECT * FROM medicamentos ORDER BY nome"
+    cursor.execute(comando_SQL)
+    lidos = cursor.fetchall()
+
+    cadMedicamento.tabelaCadastro.setRowCount(len(lidos))
+    cadMedicamento.tabelaCadastro.setColumnCount(4)
+
+    for i in range(len(lidos)):
+        for j in range(4):
+            cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+    cursor = banco.cursor()
+
+    cadMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
 
 # Entrada --> OK
 def entradas_abrir():
@@ -306,30 +353,8 @@ def cadastrar_tratamento():
     tratamento.edtTermino.setText('AAAA-MM-DD')
     tratamento.edtOBS.setText('')
 
-# Excluir cadastrados --> OK
-def excluir_dado_acolhido():
-    excluir = cadastrado.edtExcluir.text()
-
-    cursor = banco.cursor()
-
-    cursor.execute("DELETE FROM acolhidos WHERE id_acolhido=" + str(excluir))
-    banco.commit()
-
-    cadastrado.edtExcluir.setText('')
-
-    comando_SQL = "SELECT * FROM acolhidos"
-    cursor.execute(comando_SQL)
-    lidos = cursor.fetchall()
-
-    cadastrado.tabela.setRowCount(len(lidos))
-    cadastrado.tabela.setColumnCount(3)
-
-    for i in range(len(lidos)):
-        for j in range(3):
-            cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
-    cursor = banco.cursor()
-
-    cadastrado.lblAviso.setText('DADO EXLCUÍDO COM SUCESSO!')
+def excluir_tratamento():
+    print('as')
 
 # Visualizar dados cadastradps -->
 def visualizar_dado():
@@ -408,6 +433,7 @@ cadastrado.btnPesquisar.clicked.connect(pesquisar_acolhido)
 
 cadMedicamento.btnCadastrarMed.clicked.connect(cadastrar_medicamento)
 cadMedicamento.btnPesquisar.clicked.connect(pesquisar_medicamentos)
+cadMedicamento.btnExcluir.clicked.connect(excluir_medicamento)
 
 cadEntradaMedicamento.btnCadastrarMed.clicked.connect(cadastrar_entrada)
 
