@@ -86,7 +86,7 @@ def cadastrar_acolhido():
     acolhido.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
 
 # Ver acolhidos cadastrados -->
-def verCadastro():
+def ver_cadastro():
     cadastrado.show()
 
     comando_SQL = "SELECT * FROM acolhidos ORDER BY nome"
@@ -103,7 +103,7 @@ def verCadastro():
             cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
 
-def pesquisarAcolhido():
+def pesquisar_acolhido():
     pesquisa = cadastrado.edtPesquisa.text()
 
     c = banco.cursor()
@@ -168,7 +168,7 @@ def cadastrar_medicamento():
         for j in range(4):
             cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-def pesquisarMedicamentos():
+def pesquisar_medicamentos():
     pesquisa = cadMedicamento.edtPesquisa.text()
 
     c = banco.cursor()
@@ -307,7 +307,7 @@ def cadastrar_tratamento():
     tratamento.edtOBS.setText('')
 
 # Excluir cadastrados --> OK
-def excluirDado():
+def excluir_dado_acolhido():
     excluir = cadastrado.edtExcluir.text()
 
     cursor = banco.cursor()
@@ -332,7 +332,7 @@ def excluirDado():
     cadastrado.lblAviso.setText('DADO EXLCUÍDO COM SUCESSO!')
 
 # Visualizar dados cadastradps -->
-def visualizarDado():
+def visualizar_dado():
     visual.show()
 
     idVer = cadastrado.edtVisualizar.text()
@@ -396,18 +396,18 @@ ajuda = uic.loadUi("formAjuda.ui")
 
 
 acolhido.btnCadastrar.clicked.connect(cadastrar_acolhido)
-acolhido.btnVer.clicked.connect(verCadastro)
+acolhido.btnVer.clicked.connect(ver_cadastro)
 acolhido.btnMedicamento.clicked.connect(medicamentos_abrir)
 acolhido.btnEntradaMed.clicked.connect(entradas_abrir)
 acolhido.btnTratamento.clicked.connect(tratamentos_abrir)
 acolhido.btnAjuda.clicked.connect(ajuda_abrir)
 
-cadastrado.btnExcluir.clicked.connect(excluirDado)
-cadastrado.btnVisualizar.clicked.connect(visualizarDado)
-cadastrado.btnPesquisar.clicked.connect(pesquisarAcolhido)
+cadastrado.btnExcluir.clicked.connect(excluir_dado_acolhido)
+cadastrado.btnVisualizar.clicked.connect(visualizar_dado)
+cadastrado.btnPesquisar.clicked.connect(pesquisar_acolhido)
 
 cadMedicamento.btnCadastrarMed.clicked.connect(cadastrar_medicamento)
-cadMedicamento.btnPesquisar.clicked.connect(pesquisarMedicamentos)
+cadMedicamento.btnPesquisar.clicked.connect(pesquisar_medicamentos)
 
 cadEntradaMedicamento.btnCadastrarMed.clicked.connect(cadastrar_entrada)
 
