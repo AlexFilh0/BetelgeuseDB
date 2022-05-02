@@ -9,10 +9,12 @@ con = sqlite3.connect('pvn_banco.bd')
 
 c = con.cursor()
 
-c.execute("""SELECT * FROM acolhidos WHERE nome LIKE '%""" + variavel + """%' ORDER BY nome""")
+c.execute("""""")
 
+'''
 for linha in c.fetchall():
     print(linha)
+'''
 
 con.commit()
 
