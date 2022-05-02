@@ -9,13 +9,10 @@ con = sqlite3.connect('pvn_banco.bd')
 
 c = con.cursor()
 
-c.execute('''INSERT INTO acolhidos (nome, rg, cpf, nascimento) VALUES ('Jorge', '456789432', '12345234112', '2002-03-05')''')
+c.execute("""SELECT * FROM acolhidos WHERE nome LIKE '%""" + variavel + """%' ORDER BY nome""")
 
-'''
 for linha in c.fetchall():
     print(linha)
-'''
-
 
 con.commit()
 
@@ -29,5 +26,7 @@ controle medicamentos -> SELECT a.nome, m.nome, m.especificacoes, c.qtd_dose, c.
 
 entrada -> SELECT m.id_medicamento, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
     JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;
+    
+pesquisa -> SELECT * FROM acolhidos WHERE nome LIKE '%""" +  variavel + """%' ORDER BY nome;
 
 """

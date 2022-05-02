@@ -1,5 +1,5 @@
 from banco import criacao_banco
-from controle import cadastrar_acolhido, verCadastro, excluirDado
+from controle import cadastrar_acolhido, ver_cadastro, excluir_dado_acolhido
 import sqlite3
 from PyQt5 import uic, QtWidgets
 
