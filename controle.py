@@ -1,4 +1,5 @@
-from PyQt5 import uic,QtWidgets
+from PyQt5 import uic,QtWidgets, QtGui
+from PyQt5.QtWidgets import QMessageBox
 import sqlite3
 from datetime import date
 
@@ -119,28 +120,31 @@ def pesquisar_acolhido():
             cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
 def excluir_dado_acolhido():
-    excluir = cadastrado.edtExcluir.text()
+    confirmacao = confirmacao_excluir()
 
-    cursor = banco.cursor()
+    if confirmacao == 0:
+        excluir = cadastrado.edtExcluir.text()
 
-    cursor.execute("DELETE FROM acolhidos WHERE id_acolhido=" + str(excluir))
-    banco.commit()
+        cursor = banco.cursor()
 
-    cadastrado.edtExcluir.setText('')
+        cursor.execute("DELETE FROM acolhidos WHERE id_acolhido=" + str(excluir))
+        banco.commit()
 
-    comando_SQL = "SELECT * FROM acolhidos"
-    cursor.execute(comando_SQL)
-    lidos = cursor.fetchall()
+        cadastrado.edtExcluir.setText('')
 
-    cadastrado.tabela.setRowCount(len(lidos))
-    cadastrado.tabela.setColumnCount(3)
+        comando_SQL = "SELECT * FROM acolhidos"
+        cursor.execute(comando_SQL)
+        lidos = cursor.fetchall()
 
-    for i in range(len(lidos)):
-        for j in range(3):
-            cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
-    cursor = banco.cursor()
+        cadastrado.tabela.setRowCount(len(lidos))
+        cadastrado.tabela.setColumnCount(3)
 
-    cadastrado.lblAviso.setText('DADO EXLCUÍDO COM SUCESSO!')
+        for i in range(len(lidos)):
+            for j in range(3):
+                cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+        cursor = banco.cursor()
+
+        cadastrado.lblAviso.setText('DADO EXLCUÍDO COM SUCESSO!')
 
 # Ver medicamentos --> OK
 def medicamentos_abrir():
@@ -208,28 +212,31 @@ def pesquisar_medicamentos():
             cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
 def excluir_medicamento():
-    excluir = cadMedicamento.edtExcluir.text()
+    confirmacao = confirmacao_excluir()
 
-    cursor = banco.cursor()
+    if confirmacao == 0:
+        excluir = cadMedicamento.edtExcluir.text()
 
-    cursor.execute("DELETE FROM medicamentos WHERE id_medicamento=" + str(excluir))
-    banco.commit()
+        cursor = banco.cursor()
 
-    cadMedicamento.edtExcluir.setText('')
+        cursor.execute("DELETE FROM medicamentos WHERE id_medicamento=" + str(excluir))
+        banco.commit()
 
-    comando_SQL = "SELECT * FROM medicamentos ORDER BY nome"
-    cursor.execute(comando_SQL)
-    lidos = cursor.fetchall()
+        cadMedicamento.edtExcluir.setText('')
 
-    cadMedicamento.tabelaCadastro.setRowCount(len(lidos))
-    cadMedicamento.tabelaCadastro.setColumnCount(4)
+        comando_SQL = "SELECT * FROM medicamentos ORDER BY nome"
+        cursor.execute(comando_SQL)
+        lidos = cursor.fetchall()
 
-    for i in range(len(lidos)):
-        for j in range(4):
-            cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
-    cursor = banco.cursor()
+        cadMedicamento.tabelaCadastro.setRowCount(len(lidos))
+        cadMedicamento.tabelaCadastro.setColumnCount(4)
 
-    cadMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
+        for i in range(len(lidos)):
+            for j in range(4):
+                cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+        cursor = banco.cursor()
+
+        cadMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
 
 # Entrada --> OK
 def entradas_abrir():
@@ -287,29 +294,32 @@ def cadastrar_entrada():
             cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
 def excluir_entrada():
-    excluir = cadEntradaMedicamento.edtExcluir.text()
+    confirmacao = confirmacao_excluir()
 
-    cursor = banco.cursor()
+    if confirmacao == 0:
+        excluir = cadEntradaMedicamento.edtExcluir.text()
 
-    cursor.execute("DELETE FROM entradas_medicamentos WHERE id_entrada=" + str(excluir))
-    banco.commit()
+        cursor = banco.cursor()
 
-    cadEntradaMedicamento.edtExcluir.setText('')
+        cursor.execute("DELETE FROM entradas_medicamentos WHERE id_entrada=" + str(excluir))
+        banco.commit()
 
-    comando_SQL = """SELECT e.id_entrada, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
-        JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;"""
-    cursor.execute(comando_SQL)
-    lidos = cursor.fetchall()
+        cadEntradaMedicamento.edtExcluir.setText('')
 
-    cadEntradaMedicamento.tabelaEntrada.setRowCount(len(lidos))
-    cadEntradaMedicamento.tabelaEntrada.setColumnCount(6)
+        comando_SQL = """SELECT e.id_entrada, m.nome, m.especificacoes, e.qtd_entrada, e.data_entrada, e.obs FROM medicamentos as m
+            JOIN entradas_medicamentos as e ON m.id_medicamento = e.id_medicamento ORDER BY data_entrada DESC;"""
+        cursor.execute(comando_SQL)
+        lidos = cursor.fetchall()
 
-    for i in range(len(lidos)):
-        for j in range(6):
-            cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
-    cursor = banco.cursor()
+        cadEntradaMedicamento.tabelaEntrada.setRowCount(len(lidos))
+        cadEntradaMedicamento.tabelaEntrada.setColumnCount(6)
 
-    cadEntradaMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
+        for i in range(len(lidos)):
+            for j in range(6):
+                cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+        cursor = banco.cursor()
+
+        cadEntradaMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
 
 # Tratamento
 def tratamentos_abrir():
@@ -380,30 +390,33 @@ def cadastrar_tratamento():
     tratamento.edtOBS.setText('')
 
 def excluir_tratamento():
-    excluir = tratamento.edtExcluir.text()
+    confirmacao = confirmacao_excluir()
 
-    cursor = banco.cursor()
+    if confirmacao == 0:
+        excluir = tratamento.edtExcluir.text()
 
-    cursor.execute("DELETE FROM controle_medicamentos WHERE id_tratamento=" + str(excluir))
-    banco.commit()
+        cursor = banco.cursor()
 
-    tratamento.edtExcluir.setText('')
+        cursor.execute("DELETE FROM controle_medicamentos WHERE id_tratamento=" + str(excluir))
+        banco.commit()
 
-    comando_SQL = """SELECT c.id_tratamento, a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
-        c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
-        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;"""
-    cursor.execute(comando_SQL)
-    lidos = cursor.fetchall()
+        tratamento.edtExcluir.setText('')
 
-    tratamento.tabelaTratamento.setRowCount(len(lidos))
-    tratamento.tabelaTratamento.setColumnCount(9)
+        comando_SQL = """SELECT c.id_tratamento, a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
+            c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
+            JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;"""
+        cursor.execute(comando_SQL)
+        lidos = cursor.fetchall()
 
-    for i in range(len(lidos)):
-        for j in range(9):
-            tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
-    cursor = banco.cursor()
+        tratamento.tabelaTratamento.setRowCount(len(lidos))
+        tratamento.tabelaTratamento.setColumnCount(9)
 
-    tratamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
+        for i in range(len(lidos)):
+            for j in range(9):
+                tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+        cursor = banco.cursor()
+
+        tratamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
 
 # Visualizar dados cadastradps -->
 def visualizar_dado():
@@ -458,6 +471,19 @@ def visualizar_dado():
 def ajuda_abrir():
     ajuda.show()
 
+def confirmacao_excluir():
+    janela = QMessageBox()
+    janela.setIcon(QMessageBox.Warning)
+    janela.setText('Deseja excluir o dado?')
+    janela.setWindowTitle('Atenção')
+    janela.addButton('Sim', 5)
+    janela.addButton('Não', 6)
+    janela.setWindowIcon(QtGui.QIcon('imagens/excluir.png'))
+    #janela.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
+
+    retorno = janela.exec()
+    return retorno
+
 app = QtWidgets.QApplication([])
 
 acolhido = uic.loadUi("formAcolhido.ui")
@@ -489,6 +515,7 @@ cadEntradaMedicamento.btnExcluir.clicked.connect(excluir_entrada)
 
 tratamento.btnCadastrarTratamento.clicked.connect(cadastrar_tratamento)
 tratamento.btnExcluir.clicked.connect(excluir_tratamento)
+#tratamento.btnExcluir.clicked.connect(confirmacao_excluir)
 
 
 acolhido.show()
