@@ -87,8 +87,9 @@ def cadastrar_acolhido():
 
         acolhido.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 # Ver acolhidos cadastrados -->
 def ver_cadastro():
@@ -108,8 +109,9 @@ def ver_cadastro():
             for j in range(3):
                 cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 def pesquisar_acolhido():
     try:
@@ -128,8 +130,9 @@ def pesquisar_acolhido():
             for j in range(3):
                 cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 def excluir_dado_acolhido():
     try:
@@ -145,7 +148,7 @@ def excluir_dado_acolhido():
 
             cadastrado.edtExcluir.setText('')
 
-            comando_SQL = "SELECT * FROM acolhidos"
+            comando_SQL = "SELECT * FROM acolhidos ORDER BY nome"
             cursor.execute(comando_SQL)
             lidos = cursor.fetchall()
 
@@ -159,8 +162,9 @@ def excluir_dado_acolhido():
 
             cadastrado.lblAviso.setText('DADO EXLCUÍDO COM SUCESSO!')
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 # Ver medicamentos --> OK
 def medicamentos_abrir():
@@ -183,8 +187,9 @@ def medicamentos_abrir():
             for j in range(4):
                 cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 # Cadastrar medicamentos --> OK
 def cadastrar_medicamento():
@@ -216,8 +221,9 @@ def cadastrar_medicamento():
             for j in range(4):
                 cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 def pesquisar_medicamentos():
     try:
@@ -236,8 +242,9 @@ def pesquisar_medicamentos():
             for j in range(4):
                 cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 def excluir_medicamento():
     try:
@@ -267,8 +274,9 @@ def excluir_medicamento():
 
             cadMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 # Entrada --> OK
 def entradas_abrir():
@@ -291,8 +299,9 @@ def entradas_abrir():
             for j in range(6):
                 cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 # Cadastrar entrada de medicamento --> Ok
 def cadastrar_entrada():
@@ -330,8 +339,9 @@ def cadastrar_entrada():
             for j in range(6):
                 cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 def excluir_entrada():
     try:
@@ -362,8 +372,9 @@ def excluir_entrada():
 
             cadEntradaMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 # Tratamento
 def tratamentos_abrir():
@@ -371,8 +382,12 @@ def tratamentos_abrir():
         tratamento.show()
 
         tratamento.lblAviso.setText('')
+        tratamento.lblAviso_2.setText('')
 
         c = banco.cursor()
+
+        # deleta tratamentos que já terminaram
+        c.execute('''DELETE FROM controle_medicamentos WHERE termino_tratamento < current_date ''')
 
         comando_SQL = ("""SELECT c.id_tratamento, a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
         c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
@@ -387,8 +402,9 @@ def tratamentos_abrir():
             for j in range(9):
                 tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 def cadastrar_tratamento():
     try:
@@ -438,8 +454,9 @@ def cadastrar_tratamento():
         tratamento.edtTermino.setText('AAAA-MM-DD')
         tratamento.edtOBS.setText('')
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 def excluir_tratamento():
     try:
@@ -525,8 +542,9 @@ def visualizar_dado():
             for j in range(7):
                 visual.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-    except:
-        aviso_erro()
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 def ajuda_abrir():
     ajuda.show()
@@ -544,10 +562,10 @@ def confirmacao_excluir():
     retorno = janela.exec()
     return retorno
 
-def aviso_erro():
+def aviso_erro(e):
     aviso = QMessageBox()
     aviso.setIcon(QMessageBox.Warning)
-    aviso.setText('Ocorreu um erro!')
+    aviso.setText(e)
     aviso.setWindowTitle('ERRO!')
     aviso.addButton('Ok', 0)
     aviso.setWindowIcon(QtGui.QIcon('imagens/erro icon.png'))
