@@ -496,6 +496,8 @@ def visualizar_dado():
     try:
         visual.show()
 
+        visual.lblAviso.setText('')
+
         idVer = cadastrado.edtVisualizar.text()
         cursor = banco.cursor()
 
@@ -547,20 +549,26 @@ def visualizar_dado():
         erro = str(e)
         aviso_erro(erro)
 
-    #return idVer
 
 def modificar_saida():
-    idVer = cadastrado.edtVisualizar.text()
+    try:
+        confirmacao = confirmacao_modificar()
+        if confirmacao == 0:
+            idVer = cadastrado.edtVisualizar.text()
 
-    saida = visual.edtSaida.text()
+            saida = visual.edtSaida.text()
 
-    c = banco.cursor()
+            c = banco.cursor()
 
-    c.execute("""UPDATE acolhidos SET saida = '""" + saida + """' WHERE id_acolhido = """ + idVer)
+            c.execute("""UPDATE acolhidos SET saida = '""" + saida + """' WHERE id_acolhido = """ + idVer)
 
-    banco.commit()
+            banco.commit()
 
-    visualizar_dado()
+            visual.lblAviso.setText('Saída modificada com sucesso!')
+
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
 
 
 def ajuda_abrir():
@@ -577,6 +585,18 @@ def confirmacao_excluir():
     #janela.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
 
     retorno = janela.exec()
+    return retorno
+
+def confirmacao_modificar():
+    modAviso = QMessageBox()
+    modAviso.setIcon(QMessageBox.Warning)
+    modAviso.setText('Deseja modificar o dado?')
+    modAviso.setWindowTitle('Atenção')
+    modAviso.addButton('Sim', 5)
+    modAviso.addButton('Não', 6)
+    # modAviso.setWindowIcon(QtGue.QIcon('imagens/modificar icon.png'))
+
+    retorno = modAviso.exec()
     return retorno
 
 def aviso_erro(e):
