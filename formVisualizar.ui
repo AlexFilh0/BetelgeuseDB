@@ -485,19 +485,6 @@
      <string>_________</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lblSaida">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>140</y>
-      <width>71</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>_________</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="lblResponsavel">
     <property name="geometry">
      <rect>
@@ -587,6 +574,35 @@
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="edtSaida">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>140</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AAAA-MM-DD</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnModificar">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>140</y>
+      <width>75</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Modificar</string>
     </property>
    </widget>
   </widget>

@@ -506,8 +506,6 @@ def visualizar_dado():
          cpf_responsavel, vinculo_responsavel,
          entrada, saida, obs FROM acolhidos WHERE id_acolhido="""+ (str(idVer)))
 
-        cadastrado.edtVisualizar.setText('')
-
         infoGet = cursor.fetchone()
         visual.lblNome.setText(infoGet[0])
         visual.lblRG.setText(infoGet[1])
@@ -526,7 +524,8 @@ def visualizar_dado():
         visual.lblReCPF.setText(infoGet[14])
         visual.lblVinculo.setText(infoGet[15])
         visual.lblEntrada.setText(infoGet[16])
-        visual.lblSaida.setText(infoGet[17])
+        #visual.lblSaida.setText(infoGet[17])
+        visual.edtSaida.setText(infoGet[17])
         visual.lblOBS.setText(infoGet[18])
 
         cursor.execute("""SELECT m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
@@ -542,9 +541,27 @@ def visualizar_dado():
             for j in range(7):
                 visual.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
+        visual.btnModificar.clicked.connect(modificar_saida)
+
     except Exception as e:
         erro = str(e)
         aviso_erro(erro)
+
+    #return idVer
+
+def modificar_saida():
+    idVer = cadastrado.edtVisualizar.text()
+
+    saida = visual.edtSaida.text()
+
+    c = banco.cursor()
+
+    c.execute("""UPDATE acolhidos SET saida = '""" + saida + """' WHERE id_acolhido = """ + idVer)
+
+    banco.commit()
+
+    visualizar_dado()
+
 
 def ajuda_abrir():
     ajuda.show()
