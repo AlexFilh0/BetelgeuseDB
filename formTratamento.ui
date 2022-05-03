@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>imagens/tratamentos icon.png</normaloff>imagens/tratamentos icon.png</iconset>
+    <normaloff>../../.designer/backup/imagens/tratamentos icon.png</normaloff>../../.designer/backup/imagens/tratamentos icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -274,19 +274,6 @@
      </property>
     </column>
    </widget>
-   <widget class="QLabel" name="lblAviso">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>120</y>
-      <width>441</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
@@ -311,22 +298,6 @@
     </property>
     <property name="text">
      <string>*Verificar id do medicamento na tela de medicamentos</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lblAviso_2">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>510</y>
-      <width>221</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="label_10">
