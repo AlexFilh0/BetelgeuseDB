@@ -85,7 +85,7 @@ def cadastrar_acolhido():
         acolhido.edtSaida.setText('AAAA-MM-DD')
         acolhido.edtObs.setText('')
 
-        acolhido.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+        aviso_sucesso('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
 
     except Exception as e:
         erro = str(e)
@@ -160,7 +160,7 @@ def excluir_dado_acolhido():
                     cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
             cursor = banco.cursor()
 
-            cadastrado.lblAviso.setText('DADO EXLCUÍDO COM SUCESSO!')
+            aviso_sucesso('DADO EXLCUÍDO COM SUCESSO!')
 
     except Exception as e:
         erro = str(e)
@@ -170,9 +170,6 @@ def excluir_dado_acolhido():
 def medicamentos_abrir():
     try:
         cadMedicamento.show()
-
-        cadMedicamento.lblAviso.setText('')
-        cadMedicamento.lblAviso_2.setText('')
 
         c = banco.cursor()
 
@@ -206,7 +203,8 @@ def cadastrar_medicamento():
                     VALUES (?, ?, ?)''',(str(nome), str(espec), str(obs)))
         banco.commit()
 
-        cadMedicamento.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+        aviso_sucesso('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+
         cadMedicamento.edtNomeMed.setText('')
         cadMedicamento.edtObs.setText('')
         cadMedicamento.edtEsp.setText('')
@@ -272,7 +270,7 @@ def excluir_medicamento():
                     cadMedicamento.tabelaCadastro.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
             cursor = banco.cursor()
 
-            cadMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
+            aviso_sucesso('DADO EXLCUÍDO COM SUCESSO!')
 
     except Exception as e:
         erro = str(e)
@@ -282,9 +280,6 @@ def excluir_medicamento():
 def entradas_abrir():
     try:
         cadEntradaMedicamento.show()
-
-        cadEntradaMedicamento.lblAviso.setText('')
-        cadEntradaMedicamento.lblAviso_2.setText('')
 
         c = banco.cursor()
 
@@ -322,7 +317,8 @@ def cadastrar_entrada():
 
         banco.commit()
 
-        cadEntradaMedicamento.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+        aviso_sucesso('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+
         cadEntradaMedicamento.edtIdMed.setText('')
         cadEntradaMedicamento.edtQtdMed.setText('')
         cadEntradaMedicamento.edtDataMed.setText('AAAA-MM-DD')
@@ -370,7 +366,7 @@ def excluir_entrada():
                     cadEntradaMedicamento.tabelaEntrada.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
             cursor = banco.cursor()
 
-            cadEntradaMedicamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
+            aviso_sucesso('DADO EXLCUÍDO COM SUCESSO!')
 
     except Exception as e:
         erro = str(e)
@@ -380,9 +376,6 @@ def excluir_entrada():
 def tratamentos_abrir():
     try:
         tratamento.show()
-
-        tratamento.lblAviso.setText('')
-        tratamento.lblAviso_2.setText('')
 
         c = banco.cursor()
 
@@ -445,7 +438,8 @@ def cadastrar_tratamento():
             for j in range(9):
                 tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-        tratamento.lblAviso.setText('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+        aviso_sucesso('INFORMAÇÕES CADASTRADAS COM SUCESSO!')
+
         tratamento.edtIAcolhido.setText('')
         tratamento.edtIMedicamento.setText('')
         tratamento.edtDose.setText('')
@@ -486,7 +480,7 @@ def excluir_tratamento():
                     tratamento.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
             cursor = banco.cursor()
 
-            tratamento.lblAviso_2.setText('DADO EXLCUÍDO COM SUCESSO!')
+            aviso_sucesso('DADO EXLCUÍDO COM SUCESSO!')
 
     except:
         aviso_erro()
@@ -506,8 +500,6 @@ def visualizar_dado():
          cpf_responsavel, vinculo_responsavel,
          entrada, saida, obs FROM acolhidos WHERE id_acolhido="""+ (str(idVer)))
 
-        cadastrado.edtVisualizar.setText('')
-
         infoGet = cursor.fetchone()
         visual.lblNome.setText(infoGet[0])
         visual.lblRG.setText(infoGet[1])
@@ -526,7 +518,8 @@ def visualizar_dado():
         visual.lblReCPF.setText(infoGet[14])
         visual.lblVinculo.setText(infoGet[15])
         visual.lblEntrada.setText(infoGet[16])
-        visual.lblSaida.setText(infoGet[17])
+        #visual.lblSaida.setText(infoGet[17])
+        visual.edtSaida.setText(infoGet[17])
         visual.lblOBS.setText(infoGet[18])
 
         cursor.execute("""SELECT m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
@@ -542,6 +535,29 @@ def visualizar_dado():
             for j in range(7):
                 visual.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
+        visual.btnModificar.clicked.connect(modificar_saida)
+
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
+
+
+def modificar_saida():
+    try:
+        confirmacao = confirmacao_modificar()
+        if confirmacao == 0:
+            idVer = cadastrado.edtVisualizar.text()
+
+            saida = visual.edtSaida.text()
+
+            c = banco.cursor()
+
+            c.execute("""UPDATE acolhidos SET saida = '""" + saida + """' WHERE id_acolhido = """ + idVer)
+
+            banco.commit()
+
+            aviso_sucesso('SAÍDA MODIFICADA COM SUCESSO!')
+
     except Exception as e:
         erro = str(e)
         aviso_erro(erro)
@@ -549,6 +565,7 @@ def visualizar_dado():
 def ajuda_abrir():
     ajuda.show()
 
+# caixas de aviso/mensagem
 def confirmacao_excluir():
     janela = QMessageBox()
     janela.setIcon(QMessageBox.Warning)
@@ -561,6 +578,28 @@ def confirmacao_excluir():
 
     retorno = janela.exec()
     return retorno
+
+def confirmacao_modificar():
+    modAviso = QMessageBox()
+    modAviso.setIcon(QMessageBox.Warning)
+    modAviso.setText('Deseja modificar o dado?')
+    modAviso.setWindowTitle('Atenção')
+    modAviso.addButton('Sim', 5)
+    modAviso.addButton('Não', 6)
+    modAviso.setWindowIcon(QtGui.QIcon('imagens/modificar icon.png'))
+
+    retorno = modAviso.exec()
+    return retorno
+
+def aviso_sucesso(op):
+    avisoFoi = QMessageBox()
+    avisoFoi.setIcon(QMessageBox.Information)
+    avisoFoi.setText(op)
+    avisoFoi.setWindowTitle('SUCESSO!')
+    avisoFoi.addButton('Ok', 0)
+    avisoFoi.setWindowIcon(QtGui.QIcon('imagens/sucesso icon.png'))
+
+    avisoFoi.exec()
 
 def aviso_erro(e):
     aviso = QMessageBox()

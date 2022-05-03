@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>imagens/tela incial icon.png</normaloff>imagens/tela incial icon.png</iconset>
+    <normaloff>../../.designer/backup/imagens/tela incial icon.png</normaloff>../../.designer/backup/imagens/tela incial icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -558,19 +558,6 @@
     </property>
     <property name="text">
      <string>AJUDA</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lblAviso">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>350</y>
-      <width>241</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
     </property>
    </widget>
    <widget class="Line" name="line">

@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>imagens/entrada icon.png</normaloff>imagens/entrada icon.png</iconset>
+    <normaloff>../../.designer/backup/imagens/entrada icon.png</normaloff>../../.designer/backup/imagens/entrada icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -184,22 +184,6 @@
      </property>
     </column>
    </widget>
-   <widget class="QLabel" name="lblAviso">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>60</y>
-      <width>241</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
@@ -211,22 +195,6 @@
     </property>
     <property name="text">
      <string>*Verificar id do medicamento na tela de medicamentos</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lblAviso_2">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>510</y>
-      <width>221</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="edtExcluir">
