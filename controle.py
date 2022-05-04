@@ -384,7 +384,8 @@ def tratamentos_abrir():
 
         comando_SQL = ("""SELECT c.id_tratamento, a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
         c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
-        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;""")
+        JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC, 
+        c.termino_tratamento DESC;""")
         c.execute(comando_SQL)
         lidos = c.fetchall()
 
@@ -427,7 +428,8 @@ def cadastrar_tratamento():
 
         comando_SQL = ("""SELECT c.id_tratamento, a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
             c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
-            JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;""")
+            JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC, 
+            c.termino_tratamento DESC;""")
         c.execute(comando_SQL)
         lidos = c.fetchall()
         print(lidos)
@@ -468,7 +470,8 @@ def excluir_tratamento():
 
             comando_SQL = """SELECT c.id_tratamento, a.nome, m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
                 c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
-                JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC;"""
+                JOIN medicamentos as m on c.id_medicamento = m.id_medicamento ORDER BY c.inicio_tratamento DESC,
+                c.termino_tratamento DESC;"""
             cursor.execute(comando_SQL)
             lidos = cursor.fetchall()
 
@@ -524,7 +527,8 @@ def visualizar_dado():
 
         cursor.execute("""SELECT m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
             c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
-            JOIN medicamentos as m on c.id_medicamento = m.id_medicamento WHERE c.termino_tratamento >= current_date AND c.id_acolhido ="""+ (str(idVer)))
+            JOIN medicamentos as m on c.id_medicamento = m.id_medicamento WHERE c.id_acolhido ="""+ (str(idVer)) + """
+             ORDER BY c.inicio_tratamento DESC, c.termino_tratamento DESC""")
 
         lidos = cursor.fetchall()
 
