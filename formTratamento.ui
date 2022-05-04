@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../.designer/backup/imagens/tratamentos icon.png</normaloff>../../.designer/backup/imagens/tratamentos icon.png</iconset>
+    <normaloff>imagens/tratamentos icon.png</normaloff>imagens/tratamentos icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">

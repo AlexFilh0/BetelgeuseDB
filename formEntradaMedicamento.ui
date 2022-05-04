@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../.designer/backup/imagens/entrada icon.png</normaloff>../../.designer/backup/imagens/entrada icon.png</iconset>
+    <normaloff>imagens/entrada icon.png</normaloff>imagens/entrada icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
