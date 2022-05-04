@@ -50,7 +50,7 @@ def cadastrar_acolhido():
             entrada = data_atual
 
         # muda AAAA-MM-DD se não for apagado no formulário
-        if saida == 'AAAA-MM-DD':
+        if saida == 'AAAA-MM-DD' or saida == '':
             saida = '-'
 
         cursor = banco.cursor()
@@ -96,7 +96,7 @@ def ver_cadastro():
     try:
         cadastrado.show()
 
-        comando_SQL = "SELECT * FROM acolhidos ORDER BY nome"
+        comando_SQL = "SELECT * FROM acolhidos WHERE saida > current_date OR saida = '' OR saida = '-' ORDER BY nome "
         cursor = banco.cursor()
         cursor.execute(comando_SQL)
         lidos = cursor.fetchall()
@@ -119,7 +119,7 @@ def pesquisar_acolhido():
 
         c = banco.cursor()
 
-        c.execute("""SELECT * FROM acolhidos WHERE nome LIKE '%""" + pesquisa + """%' ORDER BY nome""")
+        c.execute("""SELECT * FROM acolhidos WHERE (saida > current_date OR saida = '' OR saida = '-') AND nome LIKE '%""" + pesquisa + """%' ORDER BY nome""")
 
         lidos = c.fetchall()
 
@@ -148,7 +148,7 @@ def excluir_dado_acolhido():
 
             cadastrado.edtExcluir.setText('')
 
-            comando_SQL = "SELECT * FROM acolhidos ORDER BY nome"
+            comando_SQL = "SELECT * FROM acolhidos WHERE saida > current_date OR saida = '' OR saida = '-' ORDER BY nome "
             cursor.execute(comando_SQL)
             lidos = cursor.fetchall()
 
@@ -161,6 +161,93 @@ def excluir_dado_acolhido():
             cursor = banco.cursor()
 
             aviso_sucesso('DADO EXLCUÍDO COM SUCESSO!')
+
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
+
+# TODOS ACOLHIDOS
+def ver_todos_cadastro():
+    try:
+        todosCadastrados.show()
+
+        comando_SQL = "SELECT * FROM acolhidos ORDER BY nome"
+        cursor = banco.cursor()
+        cursor.execute(comando_SQL)
+        lidos = cursor.fetchall()
+
+        todosCadastrados.tabela.setRowCount(len(lidos))
+        todosCadastrados.tabela.setColumnCount(3)
+
+        for i in range(len(lidos)):
+            for j in range(3):
+                todosCadastrados.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
+
+def pesquisar_todos_acolhidos():
+    try:
+        pesquisa = todosCadastrados.edtPesquisa.text()
+
+        c = banco.cursor()
+
+        c.execute("""SELECT * FROM acolhidos WHERE nome LIKE '%""" + pesquisa + """%' ORDER BY nome""")
+
+        lidos = c.fetchall()
+
+        todosCadastrados.tabela.setRowCount(len(lidos))
+        todosCadastrados.tabela.setColumnCount(3)
+
+        for i in range(len(lidos)):
+            for j in range(3):
+                todosCadastrados.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
+
+def excluir_dado_todos_acolhidos():
+    try:
+        confirmacao = confirmacao_excluir()
+
+        if confirmacao == 0:
+            excluir = todosCadastrados.edtExcluir.text()
+
+            cursor = banco.cursor()
+
+            cursor.execute("DELETE FROM acolhidos WHERE id_acolhido=" + str(excluir))
+            banco.commit()
+
+            todosCadastrados.edtExcluir.setText('')
+
+            comando_SQL = "SELECT * FROM acolhidos ORDER BY nome"
+            cursor.execute(comando_SQL)
+            lidos = cursor.fetchall()
+
+            todosCadastrados.tabela.setRowCount(len(lidos))
+            todosCadastrados.tabela.setColumnCount(3)
+
+            for i in range(len(lidos)):
+                for j in range(3):
+                    todosCadastrados.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+            cursor = banco.cursor()
+
+            aviso_sucesso('DADO EXLCUÍDO COM SUCESSO!')
+
+            # atualiza na tabela com os acolhidos atuais
+            comando_SQL = "SELECT * FROM acolhidos WHERE saida > current_date OR saida = '' OR saida = '-' ORDER BY nome "
+            cursor.execute(comando_SQL)
+            lidos = cursor.fetchall()
+
+            cadastrado.tabela.setRowCount(len(lidos))
+            cadastrado.tabela.setColumnCount(3)
+
+            for i in range(len(lidos)):
+                for j in range(3):
+                    cadastrado.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
 
     except Exception as e:
         erro = str(e)
@@ -545,6 +632,62 @@ def visualizar_dado():
         erro = str(e)
         aviso_erro(erro)
 
+def visualizar_dado_todos():
+    try:
+        visual.show()
+
+        idVer = todosCadastrados.edtVisualizar.text()
+        cursor = banco.cursor()
+
+        cursor.execute("""SELECT nome, rg, cpf, nascimento,
+         estado_civil, qtd_filhos, trabalho, posto_saude,
+         lazer, substancia_favorita, uso_desde_idade,
+         religiao, responsavel, rg_responsavel,
+         cpf_responsavel, vinculo_responsavel,
+         entrada, saida, obs FROM acolhidos WHERE id_acolhido="""+ (str(idVer)))
+
+        infoGet = cursor.fetchone()
+        visual.lblNome.setText(infoGet[0])
+        visual.lblRG.setText(infoGet[1])
+        visual.lblCPF.setText(infoGet[2])
+        visual.lblNascimento.setText(infoGet[3])
+        visual.lblECivil.setText(infoGet[4])
+        visual.lblFilhos.setText(str(infoGet[5]))
+        visual.lblTrabalho.setText(infoGet[6])
+        visual.lblPSaude.setText(infoGet[7])
+        visual.lblLazer.setText(infoGet[8])
+        visual.lblSubst.setText(infoGet[9])
+        visual.lblIdade.setText(str(infoGet[10]))
+        visual.lblReligiao.setText(infoGet[11])
+        visual.lblResponsavel.setText(infoGet[12])
+        visual.lblReRG.setText(infoGet[13])
+        visual.lblReCPF.setText(infoGet[14])
+        visual.lblVinculo.setText(infoGet[15])
+        visual.lblEntrada.setText(infoGet[16])
+        #visual.lblSaida.setText(infoGet[17])
+        visual.edtSaida.setText(infoGet[17])
+        visual.lblOBS.setText(infoGet[18])
+
+        cursor.execute("""SELECT m.nome, m.especificacoes, c.qtd_dose, c.frequencia, c.inicio_tratamento, 
+            c.termino_tratamento, c.obs FROM acolhidos as a JOIN controle_medicamentos as c ON a.id_acolhido = c.id_acolhido
+            JOIN medicamentos as m on c.id_medicamento = m.id_medicamento WHERE c.id_acolhido ="""+ (str(idVer)) + """
+             ORDER BY c.inicio_tratamento DESC, c.termino_tratamento DESC""")
+
+        lidos = cursor.fetchall()
+
+        visual.tabelaTratamento.setRowCount(len(lidos))
+        visual.tabelaTratamento.setColumnCount(7)
+
+        for i in range(len(lidos)):
+            for j in range(7):
+                visual.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
+
+        visual.btnModificar.clicked.connect(modificar_saida)
+
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
+
 
 def modificar_saida():
     try:
@@ -621,6 +764,7 @@ app = QtWidgets.QApplication([])
 
 acolhido = uic.loadUi("formAcolhido.ui")
 cadastrado = uic.loadUi("formCadastrado.ui")
+todosCadastrados = uic.loadUi("formAcolhidosGeral.ui")
 visual = uic.loadUi("formVisualizar.ui")
 cadMedicamento = uic.loadUi("formCadMedicamento.ui")
 cadEntradaMedicamento = uic.loadUi("formEntradaMedicamento.ui")
@@ -638,6 +782,11 @@ acolhido.btnAjuda.clicked.connect(ajuda_abrir)
 cadastrado.btnExcluir.clicked.connect(excluir_dado_acolhido)
 cadastrado.btnVisualizar.clicked.connect(visualizar_dado)
 cadastrado.btnPesquisar.clicked.connect(pesquisar_acolhido)
+cadastrado.btnVerTodos.clicked.connect(ver_todos_cadastro)
+
+todosCadastrados.btnPesquisar.clicked.connect(pesquisar_todos_acolhidos)
+todosCadastrados.btnExcluir.clicked.connect(excluir_dado_todos_acolhidos)
+todosCadastrados.btnVisualizar.clicked.connect(visualizar_dado_todos)
 
 cadMedicamento.btnCadastrarMed.clicked.connect(cadastrar_medicamento)
 cadMedicamento.btnPesquisar.clicked.connect(pesquisar_medicamentos)
