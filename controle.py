@@ -649,8 +649,6 @@ tratamento.btnExcluir.clicked.connect(excluir_tratamento)
 
 acolhido.show()
 
-acolhido.lblAviso.setText('')
-
 app.exec()
 
 banco.close()
