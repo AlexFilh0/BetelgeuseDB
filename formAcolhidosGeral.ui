@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Acolhidos</string>
+   <string>Todos Acolhidos</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -72,9 +72,6 @@
     </attribute>
     <attribute name="horizontalHeaderHighlightSections">
      <bool>true</bool>
-    </attribute>
-    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-     <bool>false</bool>
     </attribute>
     <attribute name="horizontalHeaderStretchLastSection">
      <bool>true</bool>
@@ -164,7 +161,7 @@
    <widget class="QPushButton" name="btnVisualizar">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>580</x>
       <y>490</y>
       <width>101</width>
       <height>41</height>
@@ -177,7 +174,7 @@
    <widget class="QLineEdit" name="edtVisualizar">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>460</x>
       <y>510</y>
       <width>113</width>
       <height>20</height>
@@ -187,7 +184,7 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>460</x>
       <y>490</y>
       <width>101</width>
       <height>16</height>
@@ -222,19 +219,6 @@
     <property name="icon">
      <iconset>
       <normaloff>imagens/pesquisa icon.png</normaloff>imagens/pesquisa icon.png</iconset>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnVerTodos">
-    <property name="geometry">
-     <rect>
-      <x>564</x>
-      <y>510</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>VISUALIZAR TODOS</string>
     </property>
    </widget>
   </widget>
