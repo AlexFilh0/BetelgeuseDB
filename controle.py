@@ -682,7 +682,7 @@ def visualizar_dado_todos():
             for j in range(7):
                 visual.tabelaTratamento.setItem(i, j, QtWidgets.QTableWidgetItem(str(lidos[i][j])))
 
-        visual.btnModificar.clicked.connect(modificar_saida)
+        visual.btnModificar.clicked.connect(modfificar_saida_todos)
 
     except Exception as e:
         erro = str(e)
@@ -694,6 +694,26 @@ def modificar_saida():
         confirmacao = confirmacao_modificar()
         if confirmacao == 0:
             idVer = cadastrado.edtVisualizar.text()
+
+            saida = visual.edtSaida.text()
+
+            c = banco.cursor()
+
+            c.execute("""UPDATE acolhidos SET saida = '""" + saida + """' WHERE id_acolhido = """ + idVer)
+
+            banco.commit()
+
+            aviso_sucesso('SAÍDA MODIFICADA COM SUCESSO!')
+
+    except Exception as e:
+        erro = str(e)
+        aviso_erro(erro)
+
+def modfificar_saida_todos():
+    try:
+        confirmacao = confirmacao_modificar()
+        if confirmacao == 0:
+            idVer = todosCadastrados.edtVisualizar.text()
 
             saida = visual.edtSaida.text()
 
