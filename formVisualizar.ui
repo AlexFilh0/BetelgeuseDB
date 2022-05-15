@@ -280,6 +280,9 @@
       <height>231</height>
      </rect>
     </property>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
     <column>
      <property name="text">
       <string>MEDICAMENTO</string>

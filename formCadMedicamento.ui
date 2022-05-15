@@ -172,7 +172,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../.designer/backup/imagens/pesquisa icon.png</normaloff>../../.designer/backup/imagens/pesquisa icon.png</iconset>
+      <normaloff>imagens/pesquisa icon.png</normaloff>imagens/pesquisa icon.png</iconset>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
